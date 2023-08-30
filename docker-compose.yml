@@ -1,0 +1,60 @@
+services:
+
+#  Customer Service
+
+  customer_app:
+    container_name: customer_service
+    build:
+      context: ./customer
+      dockerfile: dockerfile_app
+    command: java -jar app.jar
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customerDB
+      #     SPRING_DATASOURCE_URL: jdbc:h2:mem:customerDB
+      SERVER_PORT: 8082
+    volumes:
+      - /temp
+    networks:
+      - postgres
+    depends_on:
+      - db
+  db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+# Stock Orders Service
+
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  postgres:
+  pgadmin:

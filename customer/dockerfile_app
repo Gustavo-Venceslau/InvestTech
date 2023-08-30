@@ -1,0 +1,6 @@
+FROM bellsoft/liberica-openjdk-alpine:latest
+VOLUME /temp
+EXPOSE 8082
+ARG JAR_FILE=target/customer-1.0.jar
+ADD ${JAR_FILE} app.jar
+CMD ["java", "-jar", "app.jar"]

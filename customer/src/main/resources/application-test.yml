@@ -1,0 +1,18 @@
+# DATASOURCE
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:customerDB
+    username: sa
+    password:
+  # H2 CLIENT
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  # JPA, SQL
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
