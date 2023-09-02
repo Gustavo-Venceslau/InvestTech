@@ -1,7 +1,6 @@
 package com.galmv_.customer.domain.customer;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +16,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Customer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String firstName;
     private String lastName;
