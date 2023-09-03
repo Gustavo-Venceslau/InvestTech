@@ -1,4 +1,4 @@
-package com.galmv_.customer.factories;
+package com.galmv_.customer.factories.customer;
 
 import com.galmv_.customer.domain.customer.Customer;
 

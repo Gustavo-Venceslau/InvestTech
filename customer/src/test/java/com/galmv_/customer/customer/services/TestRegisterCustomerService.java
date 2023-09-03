@@ -5,6 +5,7 @@ import com.galmv_.customer.domain.customer.Customer;
 import com.galmv_.customer.domain.customer.CustomerDTO;
 import com.galmv_.customer.domain.customer.exceptions.CustomerAlreadyExistsException;
 import com.galmv_.customer.domain.customer.services.RegisterCustomerService;
+import com.galmv_.customer.factories.customer.MakeCustomerDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class TestRegisterCustomerService extends UnitTestsPreConfig {
     @Test
     @DisplayName("should to be able to register a new customer")
     public void testSuccessRegisterCustomerService(){
-        CustomerDTO customerDTO = new CustomerDTO("Gustavo", "Almeida", "gustavo@mail.com", "1234");
+        CustomerDTO customerDTO = MakeCustomerDTO.createDTO();
 
         Customer newCustomer = registerCustomerService.execute(customerDTO);
 
